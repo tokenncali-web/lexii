@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💘 Întrebare importantă</title>
+
+<style>
+body{
+  margin:0; min-height:100vh; display:grid; place-items:center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto;
+  background:#fff5fa; overflow:hidden;
+}
+.card{
+  width:min(520px,92vw);
+  background:#fff; border-radius:20px;
+  padding:18px; text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,.15);
+  z-index:2;
+}
+.card img{ width:100%; border-radius:14px; }
+.buttons{ position:relative; height:60px; margin-top:14px; }
+button{
+  border:0; padding:14px; border-radius:14px;
+  font-size:16px; font-weight:800; cursor:pointer;
+}
+#yes{ background:#ff4d88; color:#fff; width:48%; }
+#no{
+  background:#e9e9ee; width:48%;
+  position:absolute; right:0; top:0;
+}
+.modal{
+  position:fixed; inset:0; display:none;
+  align-items:center; justify-content:center;
+  background:rgba(0,0,0,.55); z-index:3;
+}
+.box{
+  background:#fff; padding:18px; border-radius:20px;
+  width:min(520px,92vw); text-align:center;
+}
+.box img{ width:100%; border-radius:14px; }
+#hearts{ position:fixed; inset:0; pointer-events:none; }
+.heart{
+  position:absolute; width:14px; height:14px;
+  background:red; transform:rotate(45deg);
+  animation: floatUp 4s linear forwards;
+}
+.heart:before,.heart:after{
+  content:""; position:absolute; width:14px; height:14px;
+  border-radius:50%; background:red;
+}
+.heart:before{ left:-7px }
+.heart:after{ top:-7px }
+@keyframes floatUp{
+  from{ bottom:-20px; opacity:1 }
+  to{ bottom:120vh; opacity:0 }
+}
+</style>
+</head>
+
+<body>
+
+<div id="hearts"></div>
+
+<div class="card">
+  <!-- 🔴 PUNE AICI LINKUL POZEI CU VOI -->
+  <img src="https://i.imgur.com/1CGTAXc.png">
+
+  <h1>Vrei să fii Valentine-ul meu? 💘</h1>
+
+  <div class="buttons" id="btnArea">
+    <button id="yes">YES 💖</button>
+    <button id="no">NO 🙃</button>
+  </div>
+</div>
+
+<audio id="song" src="song.mp3" preload="auto" playsinline></audio>
+
+<!-- YES -->
+<div class="modal" id="yesModal">
+  <div class="box">
+    <!-- 🔴 PUNE AICI LINKUL POZEI CU ȘOCULUI -->
+    <img src="https://i.imgur.com/V6de3Ex.png">
+    <h1>YAYYYYYY!!! 🥰💘<br><br>
+      Promit să te iubesc și să împart mereu<br>
+      cea mai bună mâncare cu tine ❤️
+    </h1>
+  </div>
+</div>
+
+<!-- NO -->
+<div class="modal" id="noModal">
+  <div class="box">
+    <!-- 🔴 POZA CU PORC -->
+    <img src="https://i.imgur.com/m7wnk58.png">
+    <h1>EȘTI PORC 🐷</h1>
+  </div>
+</div>
+
+<script>
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
+const yesModal=document.getElementById("yesModal");
+const noModal=document.getElementById("noModal");
+const song=document.getElementById("song");
+const hearts=document.getElementById("hearts");
+
+function heart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  hearts.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+}
+
+yes.onclick=()=>{
+  yesModal.style.display="flex";
+  song.play().catch(()=>{});
+  setInterval(heart,150);
+};
+
+no.onmouseenter=()=>{
+  no.style.left=Math.random()*200+"px";
+};
+
+no.onclick=()=>{
+  noModal.style.display="flex";
+};
+</script>
+
+</body>
+</html>
